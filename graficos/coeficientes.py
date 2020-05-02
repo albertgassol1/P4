@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 
-file = open("lp1_2_3.txt", 'r')
+file = open("mfcc1_2_3.txt", 'r')
 points = []
 
 f = file.read()
@@ -19,6 +19,6 @@ for point in points:
 
 plt.xlabel('a1')
 plt.ylabel('a2')
-plt.title('LPC')
+plt.title('MFCC')
 plt.grid(True)
 plt.show()
