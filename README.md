@@ -84,16 +84,24 @@ ejercicios indicados.
 
   + ¿Cuál de ellas le parece que contiene más información?
 
+MFCC y LPCC contienen más información, ya que los coeficientes estan menos correlados entre si.
+
 - Usando el programa <code>pearson</code>, obtenga los coeficientes de correlación normalizada entre los
   parámetros 2 y 3, y rellene la tabla siguiente con los valores obtenidos.
 
   |                        | LP   | LPCC | MFCC |
   |------------------------|:----:|:----:|:----:|
-  | &rho;<sub>x</sub>[2,3] |      |      |      |
+  | &rho;<sub>x</sub>[2,3] |  -0.826917    |   0.163496   |  0.250076    |
   
   + Compare los resultados de <code>pearson</code> con los obtenidos gráficamente.
+
+Los resultados concuerdan con las gráficas. Los coeficientes de LPCC y MFCC estan menos correlados entre si como indica &rho;<sub>x</sub>[2,3], en las gráficas esto se refleja con una mayor dispersión de los puntos. Los coeficientes LPC están más correlados, esto se refleja en la gráfica con una cierta "linealidad". 
+
   
 - Según la teoría, ¿qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC?
+
+Número de coeficientes LPCC = 8-10
+Número de coeficientes MFCC = 13-15
 
 ### Entrenamiento y visualización de los GMM.
 
