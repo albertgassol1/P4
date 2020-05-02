@@ -10,7 +10,7 @@ cleanup() {
 }
 
 if [[ $# != 3 ]]; then
-   echo "$0 lpc_order input.wav output.lpcc"
+   echo "$0 lpc_order num_ceps input.wav output.lpcc"
    exit 1
 fi
 
