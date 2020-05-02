@@ -79,7 +79,9 @@ ejercicios indicados.
   para una señal de prueba.
 
   <img src="img/lpcCoefs.png" width = "901" align="center">
-  
+<img src="img/lpccCoefs.png" width = "901" align="center">
+<img src="img/mfccCoefs.png" width = "901" align="center">  
+
   + ¿Cuál de ellas le parece que contiene más información?
 
 - Usando el programa <code>pearson</code>, obtenga los coeficientes de correlación normalizada entre los

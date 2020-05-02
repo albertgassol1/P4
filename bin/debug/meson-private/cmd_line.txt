@@ -1,0 +1,8 @@
+[options]
+libdir = lib
+buildtype = debug
+prefix = /home/albert/Documents/uni/3/3B/PAV/lab/Practica4
+backend = ninja
+
+[properties]
+
