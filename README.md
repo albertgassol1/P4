@@ -38,7 +38,7 @@ ejercicios indicados.
   en el *pipeline* principal (`sox`, `$X2X`, `$FRAME`, `$WINDOW` y `$LPC`).
 
   `sox`: Transforma el fichero de entrada WAVE a formato raw (sin cabecera).
-  `x2x`: Programa de `sptk` permite la conversión entre distintos formatos de datos, convierte la señal de entrada a reales en coma flotante de 32 bits sin cabecera.
+  `x2x`: Programa de `sptk` permite la conversión entre distintos formatos de datos, convierte la señal de entrada a reales en coma flotante de 32 bits sin cabecera. 
   `FRAME`: Divide la señal de entrada en tramas de 240 muestras (30ms) con desplazamientos de 80 muestras (10ms).
   `WINDOW`: Ventana de Blackman por defecto. Multiplica cada trama.
   `LPC`: Calcula los "lpc_order" (8 en nuestro caso) primeros coeficientes de predicción linial de todas las tramas.
