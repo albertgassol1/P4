@@ -1,10 +1,6 @@
 PAV - P4: reconocimiento y verificación del locutor
 ===================================================
 
-## Andrea Iturralde - Albert Gassol
-
-<img src="img/unnamed.jpg" width = "200" align="center">
-
 Obtenga su copia del repositorio de la práctica accediendo a [Práctica 4](https://github.com/albino-pav/P4)
 y pulsando sobre el botón `Fork` situado en la esquina superior derecha. A continuación, siga las
 instrucciones de la [Práctica 2](https://github.com/albino-pav/P2) para crear una rama con el apellido de
@@ -36,19 +32,10 @@ ejercicios indicados.
 - Analice el script `wav2lp.sh` y explique la misión de los distintos comandos, y sus opciones, involucrados
   en el *pipeline* principal (`sox`, `$X2X`, `$FRAME`, `$WINDOW` y `$LPC`).
   
-  `sox`: Transforma el fichero de entrada WAVE a formato raw (sin cabecera).
-  `x2x`: Programa de `sptk` permite la conversión entre distintos formatos de datos, convierte la señal de entrada a reales en coma flotante de 32 bits sin cabecera.
-  `FRAME`: Divide la señal de entrada en tramas de 240 muestras (30ms) con desplazamientos de 80 muestras (10ms).
-  `WINDOW`: Ventana de Blackman por defecto. Multiplica cada trama.
-  `LPC`: Calcula los "lpc_order" (8 en nuestro caso) primeros coeficientes de predicción linial de todas las tramas.
-
 - Explique el procedimiento seguido para obtener un fichero de formato *fmatrix* a partir de los ficheros
   de salida de SPTK (líneas 41 a 47 del script `wav2lp.sh`).
-  
-  Obtenemos los coeficientes lpc y los guardamos en los ficheros .lp. Definimos el número de columnas de la matriz como el número de coeficientes lpc. El número de filas es el número de tramas de la señal. Finalmente utilizamos `x2x`  para construir la matriz con el número de filas, el número de columnas y los datos.
+
   * ¿Por qué es conveniente usar este formato (u otro parecido)?
-  
-  Para tener los datos ordenados y poder acceder a ellos fácilmente.
 
 - Escriba el *pipeline* principal usado para calcular los coeficientes cepstrales de predicción lineal
   (LPCC) en su fichero <code>scripts/wav2lpcc.sh</code>:
@@ -60,8 +47,6 @@ ejercicios indicados.
 
 - Inserte una imagen mostrando la dependencia entre los coeficientes 2 y 3 de las tres parametrizaciones
   para una señal de prueba.
-  
-  <img src="img/lpcCoefs.png" width = "901" align="center">
   
   + ¿Cuál de ellas le parece que contiene más información?
 
