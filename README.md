@@ -78,7 +78,7 @@ ejercicios indicados.
 - Inserte una imagen mostrando la dependencia entre los coeficientes 2 y 3 de las tres parametrizaciones
   para una señal de prueba.
 
-  <img src="img/lpcCoefs.png" width = "640" align="center">
+  <img src="img/lpcCoefs.png" width = "1855" align="center">
 <img src="img/lpccCoefs.png" width = "640" align="center">
 <img src="img/mfccCoefs.png" width = "640" align="center">  
 
