@@ -1,4 +1,4 @@
-Build started at 2020-05-03T17:07:04.217460
+Build started at 2020-05-03T21:00:26.267940
 Main binary: /usr/bin/python3
 Build Options: -Dprefix=/home/albert/Documents/uni/3/3B/PAV/lab/Practica4 -Dlibdir=lib -Dbuildtype=release
 Python system: Linux
@@ -51,8 +51,8 @@ Build targets in project: 19
 
 Found ninja-1.5.1 at /usr/bin/ninja
 Running compile:
-Working directory:  /tmp/tmpjp9i9fjx
-Command line:  c++ /tmp/tmpjp9i9fjx/testfile.cpp -o /tmp/tmpjp9i9fjx/output.obj -pipe -D_FILE_OFFSET_BITS=64 -c -std=c++11 
+Working directory:  /tmp/tmpa9v0mzdw
+Command line:  c++ /tmp/tmpa9v0mzdw/testfile.cpp -o /tmp/tmpa9v0mzdw/output.obj -pipe -D_FILE_OFFSET_BITS=64 -c -std=c++11 
 
 Code:
  int i = static_cast<int>(0);
@@ -62,8 +62,8 @@ Compiler stderr:
  
 Compiler accepts -std=c++11: YES
 Running compile:
-Working directory:  /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/tmpoqfovvqp
-Command line:  c++ /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/tmpoqfovvqp/testfile.cpp -o /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/tmpoqfovvqp/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
+Working directory:  /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/tmp8i46pnmd
+Command line:  c++ /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/tmp8i46pnmd/testfile.cpp -o /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/tmp8i46pnmd/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
 
 Code:
  
