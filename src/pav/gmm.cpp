@@ -211,17 +211,22 @@ namespace upc {
 	  //
       // Update old_prob, new_prob and inc_prob in order to stop the loop if logprob does not
       // increase more than inc_threshold.
+
       new_prob = em_expectation(data, weights);
       em_maximization(data,weights);
       inc_prob = new_prob - old_prob;
       old_prob = new_prob;
+
       if (verbose & 01)
 	cout << "GMM nmix=" << nmix << "\tite=" << iteration << "\tlog(prob)=" << new_prob << "\tinc=" << inc_prob << endl;
+    
     if (inc_prob <= inc_threshold)
         return 0;
+
     }
     return 0;
   }
+    /// \HECHO Expectation-maximization & stopping criteria
 
   int GMM::em_split(const fmatrix &data, unsigned int final_nmix, unsigned int max_it, float inc_threshold, int verbose) {
     centroid(data);
