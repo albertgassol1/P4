@@ -133,7 +133,7 @@ def plotGMM(fileGMM, xDim, yDim, percents, colorGmm, filesFeat=None, colorFeat=N
 
     Z = Z.reshape(X.shape)
 
-    style = {'colors': [colorGmm] * len(percents), 'linestyles': ['dotted', 'solid']}
+    style = {'colors': [colorGmm] * len(percents), 'linestyles': ['dotted', 'solid'], 'linewidths': 3}
 
     CS = ax.contour(X, Y, Z, levels=levels, **style)
     fmt = {levels[i]: '{percent:.0%}.format(percent=percents[i])' for i in range(len(levels))}

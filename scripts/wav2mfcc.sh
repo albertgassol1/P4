@@ -16,6 +16,7 @@ cleanup() {
 
 if [[ $# != 5 ]]; then
    echo "$0 mfcc_order num_filters freq input.wav output.mfcc"
+   echo $1 $2 $3
    exit 1
 fi
 

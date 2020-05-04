@@ -1,7 +1,0 @@
-[options]
-buildtype = debug
-libdir = lib
-prefix = /home/albert/Documents/uni/3/3B/PAV/lab/Practica4
-
-[properties]
-
