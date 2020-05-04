@@ -79,8 +79,8 @@ ejercicios indicados.
   para una señal de prueba.
 
 <img src="img/lpcCoefs.png" width = "1855" align="center">
-<img src="img/lpccCoefs.png" width = "640" align="center">
-<img src="img/mfccCoefs.png" width = "640" align="center">  
+<img src="img/lpccCoefs.png" width = "562" align="center">
+<img src="img/mfccCoefs.png" width = "562" align="center">  
 
   + ¿Cuál de ellas le parece que contiene más información?
 
