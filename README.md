@@ -122,6 +122,9 @@ Complete el código necesario para entrenar modelos GMM.
   <img src="img/gmm164_data40_v2.png" width = "800" align="center">
   <img src="img/gmm164_data164_v2.png" width = "800" align="center">
 
+Podemos ver que las muestras azules (del locutor 164) quedan bastante dentro de la zona de convergencia de la GMM roja (del locutor 40), en cambio, las muestras rojas no encajan tanto dentro de la zona de convergencia de la GMM azul. 
+
+
 ### Reconocimiento del locutor.
 
 Complete el código necesario para realizar reconociminto del locutor y optimice sus parámetros.
