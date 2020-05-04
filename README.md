@@ -78,7 +78,7 @@ ejercicios indicados.
 - Inserte una imagen mostrando la dependencia entre los coeficientes 2 y 3 de las tres parametrizaciones
   para una señal de prueba.
 
-  <img src="img/lpcCoefs.png" width = "1855" align="center">
+<img src="img/lpcCoefs.png" width = "1855" align="center">
 <img src="img/lpccCoefs.png" width = "640" align="center">
 <img src="img/mfccCoefs.png" width = "640" align="center">  
 
@@ -110,9 +110,17 @@ Complete el código necesario para entrenar modelos GMM.
 - Inserte una gráfica que muestre la función de densidad de probabilidad modelada por el GMM de un locutor
   para sus dos primeros coeficientes de MFCC.
   
+  <img src="img/gmm40.png" width = "640" align="center">
+  <img src="img/gmm164.png" width = "640" align="center">
+  
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
   del modelado GMM para diferenciar las señales de uno y otro.
+  
+  <img src="img/gmm40_data40.png" width = "640" align="center">
+  <img src="img/gmm40_data164.png" width = "640" align="center">
+  <img src="img/gmm164_data40.png" width = "640" align="center">
+  <img src="img/gmm164_data164.png" width = "640" align="center">
 
 ### Reconocimiento del locutor.
 
