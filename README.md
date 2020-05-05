@@ -78,7 +78,7 @@ ejercicios indicados.
 - Inserte una imagen mostrando la dependencia entre los coeficientes 2 y 3 de las tres parametrizaciones
   para una señal de prueba.
 
-<img src="img/lpcCoefsv3.png" width = "640" align="center">
+<img src="img/lpCoefsv3.png" width = "640" align="center">
 <img src="img/lpccCoefsv3.png" width = "640" align="center">
 <img src="img/mfccCoefsv3.png" width = "640" align="center">  
 
@@ -116,6 +116,9 @@ Complete el código necesario para entrenar modelos GMM.
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
   del modelado GMM para diferenciar las señales de uno y otro.
+
+  Azul: locutor 164
+  Rojo: locutor 40
   
   <img src="img/gmm40_data40_v3.png" width = "800" align="center">
   <img src="img/gmm40_data164_v3.png" width = "800" align="center">
