@@ -101,6 +101,7 @@ Los resultados concuerdan con las gráficas. Los coeficientes de LPCC y MFCC est
 - Según la teoría, ¿qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC?
 
 Número de coeficientes LPCC = 8-12
+
 Número de coeficientes MFCC = 14-18
 
 ### Entrenamiento y visualización de los GMM.
@@ -118,6 +119,7 @@ Complete el código necesario para entrenar modelos GMM.
   del modelado GMM para diferenciar las señales de uno y otro.
 
   Azul: locutor 164
+  
   Rojo: locutor 40
   
   <img src="img/gmm40_data40_v3.png" width = "800" align="center">
