@@ -62,15 +62,15 @@ ejercicios indicados.
   
   ```bash
   sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WINDOW -l 240 -L 240 |
-	$LPC -l 240 -m $lpc_order | $LPCC -m $lpc_order -M $num_ceps > $base.lpcc
+	$LPC -l 240 -m $lpc_order | $LPCC -m $lpc_order -M $cepstrum_order > $base.lpcc
   ```
 
 - Escriba el *pipeline* principal usado para calcular los coeficientes cepstrales en escala Mel (MFCC) en
   su fichero <code>scripts/wav2mfcc.sh</code>:
   
   ```bash
-  sox $inputfile -t raw - | $X2X +sf | $FRAME -l 200 -p 40 |
-	$MFCC -l 200 -m $mfcc_order -n $num_filters -s $freq > $base.mfcc
+  sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WINDOW -l 240 -L 240 |
+	$MFCC -l 240 -m $mfcc_order -n $num_filters -s $freq > $base.mfcc
   ```
 
 ### Extracción de características.
@@ -78,9 +78,9 @@ ejercicios indicados.
 - Inserte una imagen mostrando la dependencia entre los coeficientes 2 y 3 de las tres parametrizaciones
   para una señal de prueba.
 
-<img src="img/lpcCoefs.png" width = "1855" align="center">
-<img src="img/lpccCoefs.png" width = "640" align="center">
-<img src="img/mfccCoefs.png" width = "640" align="center">  
+<img src="img/lpcCoefsv3.png" width = "640" align="center">
+<img src="img/lpccCoefsv3.png" width = "640" align="center">
+<img src="img/mfccCoefsv3.png" width = "640" align="center">  
 
   + ¿Cuál de ellas le parece que contiene más información?
 
@@ -91,7 +91,7 @@ MFCC y LPCC contienen más información, ya que los coeficientes estan menos cor
 
   |                        | LP   | LPCC | MFCC |
   |------------------------|:----:|:----:|:----:|
-  | &rho;<sub>x</sub>[2,3] |  -0.826917    |   0.163496   |  0.250076    |
+  | &rho;<sub>x</sub>[2,3] |  -0.872284    |   0.0467589   |  -0.198242
   
   + Compare los resultados de <code>pearson</code> con los obtenidos gráficamente.
 
@@ -100,8 +100,8 @@ Los resultados concuerdan con las gráficas. Los coeficientes de LPCC y MFCC est
   
 - Según la teoría, ¿qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC?
 
-Número de coeficientes LPCC = 8-10
-Número de coeficientes MFCC = 13-15
+Número de coeficientes LPCC = 8-12
+Número de coeficientes MFCC = 14-18
 
 ### Entrenamiento y visualización de los GMM.
 
@@ -110,19 +110,19 @@ Complete el código necesario para entrenar modelos GMM.
 - Inserte una gráfica que muestre la función de densidad de probabilidad modelada por el GMM de un locutor
   para sus dos primeros coeficientes de MFCC.
   
-  <img src="img/gmm40_v2.png" width = "800" align="center">
-  <img src="img/gmm164_v2.png" width = "800" align="center">
+  <img src="img/gmm40_v3.png" width = "800" align="center">
+  <img src="img/gmm164_v3.png" width = "800" align="center">
   
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
   del modelado GMM para diferenciar las señales de uno y otro.
   
-  <img src="img/gmm40_data40_v2.png" width = "800" align="center">
-  <img src="img/gmm40_data164_v2.png" width = "800" align="center">
-  <img src="img/gmm164_data40_v2.png" width = "800" align="center">
-  <img src="img/gmm164_data164_v2.png" width = "800" align="center">
+  <img src="img/gmm40_data40_v3.png" width = "800" align="center">
+  <img src="img/gmm40_data164_v3.png" width = "800" align="center">
+  <img src="img/gmm164_data164_v3.png" width = "800" align="center">
+  <img src="img/gmm164_data40_v3.png" width = "800" align="center">
 
-Podemos ver que las muestras azules (del locutor 164) quedan bastante dentro de la zona de convergencia de la GMM roja (del locutor 40), en cambio, las muestras rojas no encajan tanto dentro de la zona de convergencia de la GMM azul. 
+El modelo GMM define muy bien las características de cada señal. En las gráficas podemos ver que los GMM de cada locutor son bastante diferentes, ya que las características MFCC de cada uno son diferentes.
 
 
 ### Reconocimiento del locutor.

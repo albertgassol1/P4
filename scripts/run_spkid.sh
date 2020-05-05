@@ -50,10 +50,11 @@ if [[ $# < 1 ]]; then
    exit 1
 fi
 
-if [[ $# == 3 ]]; then
+if [[ $# == 4 ]]; then
 
     NUMCOEFS=$2
     NUMFILTERS=$3
+    NAME=$4
 fi
 # ------------------------
 # Check directories
@@ -107,8 +108,8 @@ compute_lpcc() {
 
 compute_mfcc() {
     for filename in $(cat $lists/class/all.train $lists/class/all.test); do
-        mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2mfcc $NUMCOEFS $NUMFILTERS 8 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        mkdir -p `dirname $w/$FEAT/$NAME/$filename.$FEAT`
+        EXEC="wav2mfcc $NUMCOEFS $NUMFILTERS 8 $db/$filename.wav $w/$FEAT/$NAME/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
@@ -137,17 +138,20 @@ for cmd in $*; do
 
    if [[ $cmd == train ]]; then
        ## @file
+       FOLDER=$2
+       
 	   # \TODO
 	   # Select (or change) good parameters for gmm_train
        for dir in $db/BLOCK*/SES* ; do
            name=${dir/*\/}
            echo $name ----
-           gmm_train  -v 1 -T 0.0005 -N40 -m 8 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train || exit 1
+           gmm_train  -v 1 -T 0.0005 -N40 -m 8 -d $w/$FEAT/$FOLDER -e $FEAT -g $w/gmm/$FEAT/$FOLDER/$name.gmm $lists/class/$name.train || exit 1
            echo
        done
    elif [[ $cmd == test ]]; then
+        FOLDER=$2
         #find $w/gmm/$FEAT -name '*.gmm' -printf '%P\n' | perl -pe 's/.gmm$//' | sort  > $lists/gmm.list
-       (gmm_classify -d $w/$FEAT -e $FEAT -D $w/gmm/$FEAT -E gmm $lists/gmm.list  $lists/class/all.test | tee $w/class_${FEAT}_${name_exp}.log) || exit 1
+       (gmm_classify -d $w/$FEAT/$FOLDER -e $FEAT -D $w/gmm/$FEAT/$FOLDER -E gmm $lists/gmm.list  $lists/class/all.test | tee $w/class_${FEAT}_${name_exp}.log) || exit 1
 
    elif [[ $cmd == classerr ]]; then
        if [[ ! -s $w/class_${FEAT}_${name_exp}.log ]] ; then
@@ -155,11 +159,13 @@ for cmd in $*; do
           exit 1
        fi
        # Count errors
-       perl -ne 'BEGIN {$ok=0; $err=0 my $filename1='results.txt'; open(my $fh, '>>', $filename1) or die "Could not open file '$filename1' $!"; }
+       perl -ne 'BEGIN {$ok=0; $err=0;}
                  next unless /^.*SA(...).*SES(...).*$/;
                  if ($1 == $2) {$ok++}
                  else {$err++}
-                 END {printf "nerr=%d\tntot=%d\terror_rate=%.2f%%\n", ($err, $ok+$err, 100*$err/($ok+$err)); printf $fh "nerr=%d\tntot=%d\terror_rate=%.2f%%\n", ($err, $ok+$err, 100*$err/($ok+$err));}' $w/class_${FEAT}_${name_exp}.log | tee -a $w/class_${FEAT}_${name_exp}.log
+                 END {printf "nerr=%d\tntot=%d\terror_rate=%.2f%%\n", ($err, $ok+$err, 100*$err/($ok+$err));}' $w/class_${FEAT}_${name_exp}.log | tee -a $w/class_${FEAT}_${name_exp}.log
+   #  my $filename1='results.txt'; open(my $fh, '>>', $filename1) or die "Could not open file '$filename1' $!";
+   #  printf $fh "nerr=%d\tntot=%d\terror_rate=%.2f%%\n", ($err, $ok+$err, 100*$err/($ok+$err));
    elif [[ $cmd == trainworld ]]; then
        ## @file
 	   # \TODO
