@@ -114,6 +114,14 @@ compute_mfcc() {
     done
 }
 
+compute_mcp() {
+    for filename in $(cat $lists/class/all.train $lists/class/all.test); do
+        mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
+        EXEC="wav2mfcc 20 24 8 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        echo $EXEC && $EXEC || exit 1
+    done
+}
+
 
 #  Set the name of the feature (not needed for feature extraction itself)
 if [[ ! -v FEAT && $# > 0 && "$(type -t compute_$1)" = function ]]; then
@@ -138,15 +146,17 @@ for cmd in $*; do
 
    if [[ $cmd == train ]]; then
        ## @file
-       FOLDER=$2
-       NGMM=$3
+       ## FOLDER=$2
+       ##NGMM=$3
+       NGMM = $11
        
 	   # \TODO
 	   # Select (or change) good parameters for gmm_train
        for dir in $db/BLOCK*/SES* ; do
            name=${dir/*\/}
            echo $name ----
-           gmm_train  -v 1 -T 0.0005 -N40 -m $NGMM -d $w/$FEAT/$FOLDER -e $FEAT -g $w/gmm/$FEAT/$FOLDER/$name.gmm $lists/class/$name.train || exit 1
+           ## gmm_train  -v 1 -T 0.0005 -N40 -m $NGMM -d $w/$FEAT/$FOLDER -e $FEAT -g $w/gmm/$FEAT/$FOLDER/$name.gmm $lists/class/$name.train || exit 1
+           gmm_train  -v 1 -T 0.0005 -N40 -m $NGMM -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train || exit 1
            echo
        done
    elif [[ $cmd == test ]]; then
@@ -183,8 +193,7 @@ for cmd in $*; do
 	   #   For instance:
 	   #   * <code> gmm_verify ... > $w/verif_${FEAT}_${name_exp}.log </code>
 	   #   * <code> gmm_verify ... | tee $w/verif_${FEAT}_${name_exp}.log </code>
-       echo "Implement the verify option ..."
-
+       gmm_verify -d $w/mcp -e mcp -D $w/gmm/mcp -E gmm $w/lists/gmm.list $w/lists_verify/all.test $w/lists_verify/all.test.candidates | tee $w/verif_${FEAT}_${name_exp}.log
    elif [[ $cmd == verif_err ]]; then
        if [[ ! -s $w/verif_${FEAT}_${name_exp}.log ]] ; then
           echo "ERROR: $w/verif_${FEAT}_${name_exp}.log not created"
