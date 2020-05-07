@@ -148,7 +148,7 @@ for cmd in $*; do
        ## @file
        ## FOLDER=$2
        ##NGMM=$3
-       NGMM = $11
+       NGMM=11
        
 	   # \TODO
 	   # Select (or change) good parameters for gmm_train
@@ -193,7 +193,7 @@ for cmd in $*; do
 	   #   For instance:
 	   #   * <code> gmm_verify ... > $w/verif_${FEAT}_${name_exp}.log </code>
 	   #   * <code> gmm_verify ... | tee $w/verif_${FEAT}_${name_exp}.log </code>
-       gmm_verify -d $w/mcp -e mcp -D $w/gmm/mcp -E gmm $w/lists/gmm.list $w/lists_verify/all.test $w/lists_verify/all.test.candidates | tee $w/verif_${FEAT}_${name_exp}.log
+       gmm_verify -d $w/mcp -e mcp -D $w/gmm/mcp -E gmm $lists/gmm.list $lists/verif/all.test $lists/verif/all.test.candidates | tee $w/verif_${FEAT}_${name_exp}.log
    elif [[ $cmd == verif_err ]]; then
        if [[ ! -s $w/verif_${FEAT}_${name_exp}.log ]] ; then
           echo "ERROR: $w/verif_${FEAT}_${name_exp}.log not created"
