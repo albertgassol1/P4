@@ -33,3 +33,17 @@
 6205	6375	0	src/gmm_verify	b5124f0cb1c5214
 6205	6375	0	src/gmm_train	dccf2285e8dda5e9
 6375	6740	0	meson-install	5c6232abd557cb2a
+0	592	0	build.ninja	cf3b061ff1609f5a
+1	3	1588612321	scripts/wav2lp	24c95b02f7913429
+1	3	1588619036	scripts/run_spkid	77a7672f7e1d3b7d
+1	3	1588597151	scripts/plot_gmm_feat	da9e98eaa2570256
+2	3	1588620500	scripts/wav2lpcc	68f0600e2cc925ca
+2	3	1588615084	scripts/run_all	255129e22a7e8a2f
+2	4	1588364552	scripts/spk_verif_score	6b4fff024b8f2607
+2	4	1588620427	scripts/wav2mfcc	2827fec47f61087e
+2	4	1588364552	pav_spkid_pytorch/make_spk2idx	9d62f41fff6aed1a
+2	4	1588672872	scripts/run_train_test	d2bbaea285691f7b
+2	4	1588364552	pav_spkid_pytorch/test_nn	53f606e8cc2e16ec
+3	4	1588364552	pav_spkid_pytorch/utils	346b56a97e6265f9
+3	5	1588364552	pav_spkid_pytorch/train_nn	40975bc5fbafa1f9
+5	371	0	meson-install	5c6232abd557cb2a

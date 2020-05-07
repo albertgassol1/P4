@@ -137,6 +137,18 @@ Complete el código necesario para realizar reconociminto del locutor y optimice
 - Inserte una tabla con la tasa de error obtenida en el reconocimiento de los locutores de la base de datos
   SPEECON usando su mejor sistema de reconocimiento para los parámetros LP, LPCC y MFCC.
 
+ |  Metodo |  Número errores | Número total | Tasa de error |
+ |-------- |:---------------:|:------------:|:-------------:|
+ |  LPCC   |  29             |   785        |  3.57%        |
+ |  LP     |  166            |   785        |  21.15%       |
+ |  MFCC   |  10             |   785        |  1.27%        |
+
+**MFCC:** Número de coeficientes = 20. Número de filtros = 24. Número de Gaussianas por GMM = 11.
+
+**LPCC:** Número de coeficientes = 14. Orden de LP = 14. Número de Gaussianas por GMM = 8.
+
+**LP:** Orden = 14. Número de Gaussianas por GMM = 8.
+
 ### Verificación del locutor.
 
 Complete el código necesario para realizar verificación del locutor y optimice sus parámetros.

@@ -1,6 +1,6 @@
-Build started at 2020-05-04T15:30:44.708430
+Build started at 2020-05-05T12:01:27.937390
 Main binary: /usr/bin/python3
-Build Options: -Dprefix=/home/albert/Documents/uni/3/3B/PAV/lab/Practica4 -Dbuildtype=release -Dlibdir=lib
+Build Options: -Dbackend=ninja -Dprefix=/home/albert/Documents/uni/3/3B/PAV/lab/Practica4 -Dlibdir=lib -Dbuildtype=release
 Python system: Linux
 The Meson build system
 Version: 0.53.2
@@ -9,34 +9,8 @@ Build dir: /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release
 Build type: native build
 Project name: Práctica 4 de PAV - reconocimiento y verificación del locutor
 Project version: v2.0
-No CXXFLAGS in the environment, not changing global flags.
-No LDFLAGS in the environment, not changing global flags.
-No CPPFLAGS in the environment, not changing global flags.
-Sanity testing C++ compiler: c++
-Is cross compiler: False.
-Sanity check compiler command line: c++ /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/sanitycheckcpp.cc -o /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/sanitycheckcpp.exe -pipe -D_FILE_OFFSET_BITS=64
-Sanity check compile stdout:
-
------
-Sanity check compile stderr:
-
------
-Running test binary command: /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/sanitycheckcpp.exe
 C++ compiler for the build machine: c++ (gcc 5.4.0 "c++ (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609")
 C++ linker for the build machine: c++ ld.bfd 2.26.1
-No CXXFLAGS in the environment, not changing global flags.
-No LDFLAGS in the environment, not changing global flags.
-No CPPFLAGS in the environment, not changing global flags.
-Sanity testing C++ compiler: c++
-Is cross compiler: False.
-Sanity check compiler command line: c++ /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/sanitycheckcpp.cc -o /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/sanitycheckcpp.exe -pipe -D_FILE_OFFSET_BITS=64
-Sanity check compile stdout:
-
------
-Sanity check compile stderr:
-
------
-Running test binary command: /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/sanitycheckcpp.exe
 C++ compiler for the host machine: c++ (gcc 5.4.0 "c++ (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609")
 C++ linker for the host machine: c++ ld.bfd 2.26.1
 Build machine cpu family: x86_64
@@ -47,12 +21,12 @@ Target machine cpu family: x86_64
 Target machine cpu: x86_64
 Program doxygen found: YES (/usr/bin/doxygen)
 Configuring Doxyfile using configuration
-Build targets in project: 20
+Build targets in project: 21
 
 Found ninja-1.5.1 at /usr/bin/ninja
 Running compile:
-Working directory:  /tmp/tmp9jvuo24a
-Command line:  c++ /tmp/tmp9jvuo24a/testfile.cpp -o /tmp/tmp9jvuo24a/output.obj -pipe -D_FILE_OFFSET_BITS=64 -c -std=c++11 
+Working directory:  /tmp/tmpwr_uei8e
+Command line:  c++ /tmp/tmpwr_uei8e/testfile.cpp -o /tmp/tmpwr_uei8e/output.obj -pipe -D_FILE_OFFSET_BITS=64 -c -std=c++11 
 
 Code:
  int i = static_cast<int>(0);
@@ -62,8 +36,8 @@ Compiler stderr:
  
 Compiler accepts -std=c++11: YES
 Running compile:
-Working directory:  /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/tmp5fvtsl07
-Command line:  c++ /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/tmp5fvtsl07/testfile.cpp -o /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/tmp5fvtsl07/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
+Working directory:  /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/tmpelogmu6r
+Command line:  c++ /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/tmpelogmu6r/testfile.cpp -o /home/albert/Documents/uni/3/3B/PAV/lab/Practica4/P4/bin/release/meson-private/tmpelogmu6r/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
 
 Code:
  

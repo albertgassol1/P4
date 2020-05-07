@@ -2,6 +2,7 @@
 prefix = /home/albert/Documents/uni/3/3B/PAV/lab/Practica4
 buildtype = release
 libdir = lib
+backend = ninja
 
 [properties]
 

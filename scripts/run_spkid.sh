@@ -93,7 +93,7 @@ fi
 compute_lp() {
     for filename in $(cat $lists/class/all.train $lists/class/all.test); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2lp 8 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        EXEC="wav2lp 14 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
@@ -101,7 +101,7 @@ compute_lp() {
 compute_lpcc() {
     for filename in $(cat $lists/class/all.train $lists/class/all.test); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2lpcc 8 8 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        EXEC="wav2lpcc 14 14  $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
@@ -139,13 +139,14 @@ for cmd in $*; do
    if [[ $cmd == train ]]; then
        ## @file
        FOLDER=$2
+       NGMM=$3
        
 	   # \TODO
 	   # Select (or change) good parameters for gmm_train
        for dir in $db/BLOCK*/SES* ; do
            name=${dir/*\/}
            echo $name ----
-           gmm_train  -v 1 -T 0.0005 -N40 -m 8 -d $w/$FEAT/$FOLDER -e $FEAT -g $w/gmm/$FEAT/$FOLDER/$name.gmm $lists/class/$name.train || exit 1
+           gmm_train  -v 1 -T 0.0005 -N40 -m $NGMM -d $w/$FEAT/$FOLDER -e $FEAT -g $w/gmm/$FEAT/$FOLDER/$name.gmm $lists/class/$name.train || exit 1
            echo
        done
    elif [[ $cmd == test ]]; then
@@ -164,7 +165,7 @@ for cmd in $*; do
                  if ($1 == $2) {$ok++}
                  else {$err++}
                  END {printf "nerr=%d\tntot=%d\terror_rate=%.2f%%\n", ($err, $ok+$err, 100*$err/($ok+$err));}' $w/class_${FEAT}_${name_exp}.log | tee -a $w/class_${FEAT}_${name_exp}.log
-   #  my $filename1='results.txt'; open(my $fh, '>>', $filename1) or die "Could not open file '$filename1' $!";
+   #  my $filename1='results.txt'; open(my $fh, '>>', $filename1) or die "Could not open file '$filename1'! $";
    #  printf $fh "nerr=%d\tntot=%d\terror_rate=%.2f%%\n", ($err, $ok+$err, 100*$err/($ok+$err));
    elif [[ $cmd == trainworld ]]; then
        ## @file
