@@ -8,7 +8,8 @@ scripts = [
     'wav2lpcc.sh',
     'wav2mfcc.sh',
     'run_all.sh',
-    'run_train_test.sh'
+    'run_train_test.sh',
+    'run_verify.sh'
 ]
 
 foreach script: scripts

@@ -50,7 +50,7 @@ if [[ $# < 1 ]]; then
    exit 1
 fi
 
-if [[ $# == 4 ]]; then
+if [[ $# > 2 ]]; then
 
     NUMCOEFS=$2
     NUMFILTERS=$3
@@ -117,7 +117,7 @@ compute_mfcc() {
 compute_mcp() {
     for filename in $(cat $lists/class/all.train $lists/class/all.test); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2mfcc 20 24 8 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        EXEC="wav2mfcc $NUMCOEFS $NUMFILTERS 8 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
@@ -146,16 +146,16 @@ for cmd in $*; do
 
    if [[ $cmd == train ]]; then
        ## @file
-       ## FOLDER=$2
-       ##NGMM=$3
-       NGMM=11
+       #FOLDER=$2
+       NGMM=$2
+       
        
 	   # \TODO
 	   # Select (or change) good parameters for gmm_train
        for dir in $db/BLOCK*/SES* ; do
            name=${dir/*\/}
            echo $name ----
-           ## gmm_train  -v 1 -T 0.0005 -N40 -m $NGMM -d $w/$FEAT/$FOLDER -e $FEAT -g $w/gmm/$FEAT/$FOLDER/$name.gmm $lists/class/$name.train || exit 1
+           #gmm_train  -v 1 -T 0.0005 -N40 -m $NGMM -d $w/$FEAT/$FOLDER -e $FEAT -g $w/gmm/$FEAT/$FOLDER/$name.gmm $lists/class/$name.train || exit 1
            gmm_train  -v 1 -T 0.0005 -N40 -m $NGMM -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train || exit 1
            echo
        done
@@ -183,7 +183,8 @@ for cmd in $*; do
 	   # Implement 'trainworld' in order to get a Universal Background Model for speaker verification
 	   #
 	   # - The name of the world model will be used by gmm_verify in the 'verify' command below.
-       echo "Implement the trainworld option ..."
+       NGMMTRAIN=$2
+       gmm_train  -v 1 -T 0.0005 -N40 -m $NGMMTRAIN -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/world.gmm $lists/verif/users_and_others.train || exit 11
    elif [[ $cmd == verify ]]; then
        ## @file
 	   # \TODO 
@@ -193,8 +194,8 @@ for cmd in $*; do
 	   #   For instance:
 	   #   * <code> gmm_verify ... > $w/verif_${FEAT}_${name_exp}.log </code>
 	   #   * <code> gmm_verify ... | tee $w/verif_${FEAT}_${name_exp}.log </code>
-        gmm_verify -d $w/mcp -e mcp -D $w/gmm/mcp -E gmm $lists/gmm.list $lists/verif/all.test $lists/verif/all.test.candidates | tee $w/verif_${FEAT}_${name_exp}.log
-        spk_verif_score $w/verif_${FEAT}_${name_exp}.log
+        gmm_verify -d $w/mcp -e mcp -D $w/gmm/mcp -w world -E gmm $lists/gmm.list $lists/verif/all.test $lists/verif/all.test.candidates | tee $w/verif_${FEAT}_${name_exp}.log
+        
    elif [[ $cmd == verif_err ]]; then
        if [[ ! -s $w/verif_${FEAT}_${name_exp}.log ]] ; then
           echo "ERROR: $w/verif_${FEAT}_${name_exp}.log not created"
@@ -202,7 +203,7 @@ for cmd in $*; do
        fi
        # You can pass the threshold to spk_verif_score.pl or it computes the
        # best one for these particular results.
-       spk_verif_score.pl $w/verif_${FEAT}_${name_exp}.log | tee $w/verif_${FEAT}_${name_exp}.res
+       spk_verif_score $w/verif_${FEAT}_${name_exp}.log | tee $w/verif_${FEAT}_${name_exp}.res
 
    elif [[ $cmd == finalclass ]]; then
        ## @file

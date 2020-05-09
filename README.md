@@ -79,7 +79,7 @@ ejercicios indicados.
   para una señal de prueba.
 
 <img src="img/lpCoefsv3.png" width = "640" align="center">
-<img src="img/lpccCoefsv3.png" width = "640" align="center">
+<img src="img/lpccCoefsv4.png" width = "640" align="center">
 <img src="img/mfccCoefsv3.png" width = "640" align="center">  
 
   + ¿Cuál de ellas le parece que contiene más información?
@@ -91,7 +91,7 @@ MFCC y LPCC contienen más información, ya que los coeficientes estan menos cor
 
   |                        | LP   | LPCC | MFCC |
   |------------------------|:----:|:----:|:----:|
-  | &rho;<sub>x</sub>[2,3] |  -0.872284    |   0.0467589   |  -0.198242
+  | &rho;<sub>x</sub>[2,3] |  -0.872284    |   0.184235   |  -0.198242
   
   + Compare los resultados de <code>pearson</code> con los obtenidos gráficamente.
 
@@ -148,6 +148,8 @@ Complete el código necesario para realizar reconociminto del locutor y optimice
 **LPCC:** Número de coeficientes = 14. Orden de LP = 14. Número de Gaussianas por GMM = 8.
 
 **LP:** Orden = 14. Número de Gaussianas por GMM = 8.
+
+Para la realización de este apartado hemos generado el script `run_all.sh`, que genera la paramterización MFCC con distintos valores de número de coeficientes y número de filtros. También hemos desarrolado el script `run_train_test.sh`, que entrena GMM con varios números de gaussianas, coeficientes y filtros MFCC. Finalmente, el script calcula la tasa de error con los parámetros de la iteración en la que se encuentre y guarda los resultados en el fichero results.txt. Para poder realizar estas operaciones, también hemos modificado el script `run_spkid.sh` con el fin de poder passar los parámetros adecuados con los scripts anteriores.
 
 ### Verificación del locutor.
 
