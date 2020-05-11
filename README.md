@@ -149,7 +149,7 @@ Complete el código necesario para realizar reconociminto del locutor y optimice
 
 **LP:** Orden = 14. Número de Gaussianas por GMM = 8.
 
-Para la realización de este apartado hemos generado el script `run_all.sh`, que genera la paramterización MFCC con distintos valores de número de coeficientes y número de filtros. También hemos desarrolado el script `run_train_test.sh`, que entrena GMM con varios números de gaussianas, coeficientes y filtros MFCC. Finalmente, el script calcula la tasa de error con los parámetros de la iteración en la que se encuentre y guarda los resultados en el fichero results.txt. Para poder realizar estas operaciones, también hemos modificado el script `run_spkid.sh` con el fin de poder passar los parámetros adecuados con los scripts anteriores.
+Para la realización de este apartado hemos generado el script `run_all.sh`, que genera la paramterización MFCC con distintos valores de número de coeficientes y número de filtros. También hemos desarrolado el script `run_train_test.sh`, que entrena GMM con varios números de gaussianas, coeficientes y filtros MFCC. Finalmente, el script calcula la tasa de error con los parámetros de la iteración en la que se encuentre y guarda los resultados en el fichero `results.txt`. En el fitxero `best.txt` se encuentran las tres mejores parametrizaciones sacadas de `results.txt`. Para poder realizar estas operaciones, también hemos generado el script `run_spkid_modified.sh` (hecho a partir de `run_spkid.sh`) con el fin de poder passar los parámetros adecuados con los scripts anteriores.
 
 ### Verificación del locutor.
 
@@ -159,11 +159,53 @@ Complete el código necesario para realizar verificación del locutor y optimice
   de verificación de SPEECON. La tabla debe incluir el umbral óptimo, el número de falsas alarmas y de
   pérdidas, y el score obtenido usando la parametrización que mejor resultado le hubiera dado en la tarea
   de reconocimiento.
- 
+
+La parametrización que mejor resultado nos ha dado es utilizando **MFCC**. Con 16 coeficientes MFCC, 20 filtros, 20 gaussianas por GMM y 100 gaussianas para la GMM world. El resultado es el siguiente.
+
+ |  Missed |  False Alarm    | Cost detection | Threshhold         |
+ |-------- |:---------------:|:--------------:|:------------------:|
+ |  49/250 |  0/1000         |   19.6         | -0.323600500728088 |
+
+Con los parámetros óptimos en classificación el resultado en verifiación es el siguiente:
+
+ |  Missed |  False Alarm    | Cost detection | Threshhold        |
+ |-------- |:---------------:|:--------------:|:-----------------:|
+ | 184/250 |  0/1000         |   73.6         | 0.398814340647004 |
+
+Podemos ver que los resultados son mucho peores que los anteriores.
+
+Para encontrar unos parámetros más o menos buenos para este apartado de verificación, hemos generado el script `run_verify.sh`, ue junto con`run_spkid_modified.sh`, permite calcular varios costes con distintas parametrizaciones.
+
+### Conclusion.
+
+Finalmente, podemos concluir que nuestro mejor sistema se obtiene con MFCC: 6 coeficientes MFCC, 20 filtros, 20 gaussianas por GMM y 100 gaussianas para la GMM world. 
+
+Los resultados de verifiación se indican en la tabla anterior, los de classificación son los siguientes.
+
+ |  Número errores | Número total | Tasa de error|
+ |----------------:|:------------:|:------------:|
+ |  12             |   785        |  1.53%       |
+
+
+Si se ejecuta el comando que viene a continuación, se puede observar el comporamiento del sistema con los párametros descritos en este apartado.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
+run_spkid mfcc train test classerr trainworld verify verifyerr
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 ### Test final y trabajo de ampliación.
 
 - Recuerde adjuntar los ficheros `class_test.log` y `verif_test.log` correspondientes a la evaluación
   *ciega* final.
+
+Para realizar la evaluación ciega con los parámetros descritos en el apartado anterior se debe utilizar el comando:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
+FEAT=mfcc run_spkid finalclass finalverif
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los resultados se guardan en los ficheros `workFinal/class_test.log` y `workFinal/verif_test.log`.
 
 - Recuerde, también, enviar a Atenea un fichero en formato zip o tgz con la memoria con el trabajo
   realizado como ampliación, así como los ficheros `class_ampl.log` y/o `verif_ampl.log`, obtenidos como
