@@ -51,7 +51,7 @@ ejercicios indicados.
 - Explique el procedimiento seguido para obtener un fichero de formato *fmatrix* a partir de los ficheros
   de salida de SPTK (líneas 41 a 47 del script `wav2lp.sh`).
 
-  Obtenemos los coeficientes lpc y los guardamos en los ficheros .lp. Definimos el número de columnas de la matriz como el número de coeficientes lpc. El número de filas es el número de tramas de la señal. Finalmente utilizamos `x2x`  para construir la matriz con el número de filas, el número de columnas y los datos.
+  Obtenemos los coeficientes LPC y los guardamos en los ficheros .lp. Definimos el número de columnas de la matriz como el número de coeficientes lpc+1. El número de filas es el número de tramas de la señal. Finalmente utilizamos `x2x`  para construir la matriz con el número de filas, el número de columnas y los datos.
 
   * ¿Por qué es conveniente usar este formato (u otro parecido)?
 
@@ -95,7 +95,7 @@ MFCC y LPCC contienen más información, ya que los coeficientes estan menos cor
   
   + Compare los resultados de <code>pearson</code> con los obtenidos gráficamente.
 
-Los resultados concuerdan con las gráficas. Los coeficientes de LPCC y MFCC estan menos correlados entre si como indica &rho;<sub>x</sub>[2,3], en las gráficas esto se refleja con una mayor dispersión de los puntos. Los coeficientes LPC están más correlados, esto se refleja en la gráfica con una cierta "linealidad". 
+Los resultados concuerdan con las gráficas. Los coeficientes de LPCC y MFCC están menos correlados entre si como indica &rho;<sub>x</sub>[2,3], en las gráficas esto se refleja con una mayor dispersión de los puntos. Los coeficientes LPC están más correlados, esto se refleja en la gráfica con una cierta "linealidad". 
 
   
 - Según la teoría, ¿qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC?
@@ -149,7 +149,7 @@ Complete el código necesario para realizar reconociminto del locutor y optimice
 
 **LP:** Orden = 14. Número de Gaussianas por GMM = 8.
 
-Para la realización de este apartado hemos generado el script `run_all.sh`, que genera la paramterización MFCC con distintos valores de número de coeficientes y número de filtros. También hemos desarrolado el script `run_train_test.sh`, que entrena GMM con varios números de gaussianas, coeficientes y filtros MFCC. Finalmente, el script calcula la tasa de error con los parámetros de la iteración en la que se encuentre y guarda los resultados en el fichero `results.txt`. En el fitxero `best.txt` se encuentran las tres mejores parametrizaciones sacadas de `results.txt`. Para poder realizar estas operaciones, también hemos generado el script `run_spkid_modified.sh` (hecho a partir de `run_spkid.sh`) con el fin de poder passar los parámetros adecuados con los scripts anteriores.
+Para la realización de este apartado, hemos generado el script `run_all.sh`, que genera la paramterización MFCC con distintos valores de número de coeficientes y número de filtros. También hemos desarrolado el script `run_train_test.sh`, que entrena GMM con varios números de gaussianas, coeficientes y filtros MFCC. Finalmente, el script calcula la tasa de error con los parámetros de la iteración en la que se encuentre y guarda los resultados en el fichero `results.txt`. En el fichero `best.txt` se encuentran las tres mejores parametrizaciones sacadas de `results.txt`. Para poder realizar estas operaciones, también hemos generado el script `run_spkid_modified.sh` (hecho a partir de `run_spkid.sh`) con el fin de poder passar los parámetros adecuados con los scripts anteriores.
 
 ### Verificación del locutor.
 
@@ -174,13 +174,13 @@ Con los parámetros óptimos en classificación el resultado en verifiación es 
 
 Podemos ver que los resultados son mucho peores que los anteriores.
 
-Para encontrar unos parámetros más o menos buenos para este apartado de verificación, hemos generado el script `run_verify.sh`, ue junto con`run_spkid_modified.sh`, permite calcular varios costes con distintas parametrizaciones.
+Para encontrar unos parámetros más buenos para este apartado de verificación, hemos generado el script `run_verify.sh`, que junto con`run_spkid_modified.sh`, permite calcular varios costes con distintas parametrizaciones.
 
-### Conclusion.
+### Conclusión.
 
-Finalmente, podemos concluir que nuestro mejor sistema se obtiene con MFCC: 6 coeficientes MFCC, 20 filtros, 20 gaussianas por GMM y 100 gaussianas para la GMM world. 
+Finalmente, podemos concluir que nuestro mejor sistema se obtiene con MFCC: 16 coeficientes MFCC, 20 filtros, 20 gaussianas por GMM y 100 gaussianas para la GMM world. 
 
-Los resultados de verifiación se indican en la tabla anterior, los de classificación son los siguientes.
+Los resultados de verifiación se indican en la tabla anterior, los de clasificación son los siguientes.
 
  |  Número errores | Número total | Tasa de error|
  |----------------:|:------------:|:------------:|
