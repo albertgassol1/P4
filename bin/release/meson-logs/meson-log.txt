@@ -1,0 +1,76 @@
+Build started at 2020-06-14T20:10:17.837090
+Main binary: /usr/bin/python3
+Build Options: -Dprefix=/home/albert/Documents/uni/3/3B/PAV/lab/Practica4 -Dlibdir=lib -Dbuildtype=release
+Python system: Linux
+The Meson build system
+Version: 0.53.2
+Source dir: /home/albert/Documents/uni/3/3B/PAV/lab/Practica4Amp/P4
+Build dir: /home/albert/Documents/uni/3/3B/PAV/lab/Practica4Amp/P4/bin/release
+Build type: native build
+Project name: Práctica 4 de PAV - reconocimiento y verificación del locutor
+Project version: v2.0
+No CXXFLAGS in the environment, not changing global flags.
+No LDFLAGS in the environment, not changing global flags.
+No CPPFLAGS in the environment, not changing global flags.
+Sanity testing C++ compiler: c++
+Is cross compiler: False.
+Sanity check compiler command line: c++ /home/albert/Documents/uni/3/3B/PAV/lab/Practica4Amp/P4/bin/release/meson-private/sanitycheckcpp.cc -o /home/albert/Documents/uni/3/3B/PAV/lab/Practica4Amp/P4/bin/release/meson-private/sanitycheckcpp.exe -pipe -D_FILE_OFFSET_BITS=64
+Sanity check compile stdout:
+
+-----
+Sanity check compile stderr:
+
+-----
+Running test binary command: /home/albert/Documents/uni/3/3B/PAV/lab/Practica4Amp/P4/bin/release/meson-private/sanitycheckcpp.exe
+C++ compiler for the build machine: c++ (gcc 5.4.0 "c++ (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609")
+C++ linker for the build machine: c++ ld.bfd 2.26.1
+No CXXFLAGS in the environment, not changing global flags.
+No LDFLAGS in the environment, not changing global flags.
+No CPPFLAGS in the environment, not changing global flags.
+Sanity testing C++ compiler: c++
+Is cross compiler: False.
+Sanity check compiler command line: c++ /home/albert/Documents/uni/3/3B/PAV/lab/Practica4Amp/P4/bin/release/meson-private/sanitycheckcpp.cc -o /home/albert/Documents/uni/3/3B/PAV/lab/Practica4Amp/P4/bin/release/meson-private/sanitycheckcpp.exe -pipe -D_FILE_OFFSET_BITS=64
+Sanity check compile stdout:
+
+-----
+Sanity check compile stderr:
+
+-----
+Running test binary command: /home/albert/Documents/uni/3/3B/PAV/lab/Practica4Amp/P4/bin/release/meson-private/sanitycheckcpp.exe
+C++ compiler for the host machine: c++ (gcc 5.4.0 "c++ (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609")
+C++ linker for the host machine: c++ ld.bfd 2.26.1
+Build machine cpu family: x86_64
+Build machine cpu: x86_64
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Target machine cpu family: x86_64
+Target machine cpu: x86_64
+Program doxygen found: YES (/usr/bin/doxygen)
+Configuring Doxyfile using configuration
+Build targets in project: 21
+
+Found ninja-1.5.1 at /usr/bin/ninja
+Running compile:
+Working directory:  /tmp/tmpdcrpw_gi
+Command line:  c++ /tmp/tmpdcrpw_gi/testfile.cpp -o /tmp/tmpdcrpw_gi/output.obj -pipe -D_FILE_OFFSET_BITS=64 -c -std=c++11 
+
+Code:
+ int i = static_cast<int>(0);
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Compiler accepts -std=c++11: YES
+Running compile:
+Working directory:  /home/albert/Documents/uni/3/3B/PAV/lab/Practica4Amp/P4/bin/release/meson-private/tmp_p26d_yn
+Command line:  c++ /home/albert/Documents/uni/3/3B/PAV/lab/Practica4Amp/P4/bin/release/meson-private/tmp_p26d_yn/testfile.cpp -o /home/albert/Documents/uni/3/3B/PAV/lab/Practica4Amp/P4/bin/release/meson-private/tmp_p26d_yn/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
+
+Code:
+ 
+Compiler stdout:
+ install: /usr/lib/gcc/x86_64-linux-gnu/5/
+programs: =/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../../x86_64-linux-gnu/bin/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../../x86_64-linux-gnu/bin/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../../x86_64-linux-gnu/bin/
+libraries: =/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../../x86_64-linux-gnu/lib/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../../x86_64-linux-gnu/lib/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../../x86_64-linux-gnu/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib/:/lib/x86_64-linux-gnu/5/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/5/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../../x86_64-linux-gnu/lib/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../:/lib/:/usr/lib/
+
+Compiler stderr:
+ 
