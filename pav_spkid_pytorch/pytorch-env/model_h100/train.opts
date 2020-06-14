@@ -1,0 +1,18 @@
+{
+  "epoch": 20,
+  "db_path": "workFinal/mfcc",
+  "in_frames": 1,
+  "log_freq": 20,
+  "momentum": 0.5,
+  "patience": 10,
+  "tr_list_file": "lists/class/all.train",
+  "hsize": 100,
+  "ext": "mfcc",
+  "batch_size": 1000,
+  "spk2idx": "lists/class/spk2idx.json",
+  "input_dim": 16,
+  "num_spks": 157,
+  "save_path": "model_h100",
+  "va_list_file": "lists/class/all.test",
+  "lr": 0.001
+}

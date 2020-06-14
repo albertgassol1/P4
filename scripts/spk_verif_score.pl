@@ -47,12 +47,18 @@ sub read_data {
 	    exit 1;
 	}
 	$user = $1;
+
 	if ($spkid !~ /SES(...)/) {
 	    print STDERR "Format error in spk ($spkid), line $_\n";
 	    exit 1;
 	}
 	$spkid = $1;
-	
+	#print $user; #real
+	#print "\n";
+	#print $spkid; #usuari o impostor
+	#print "\n";
+	#print $score; #llindar likelihood
+	#print "\n";
 	$min_score = $score if $min_score > $score;
 	$max_score = $score if $max_score < $score;
 	
@@ -108,8 +114,8 @@ if ($threshold == -1e30) {
     print "\n\n" if $show_threshold_search;
 } 
 
-$n_falseAlarm = count_gt($threshold, @impostors);
-$n_miss = $n_users -count_gt($threshold, @users);
+$n_falseAlarm = count_gt($threshold, @impostors); #nombre d impostors amb score>th
+$n_miss = $n_users -count_gt($threshold, @users); #usuaris - nombre d usuaris amb score>th --> miss
 $p_miss = $n_miss/$n_users;
 $p_falseAlarm = $n_falseAlarm/$n_impostors;
 $cost = $p_miss * $p_target + $p_falseAlarm * (1-$p_target);

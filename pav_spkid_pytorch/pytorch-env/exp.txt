@@ -1,0 +1,4 @@
+hsize = numero de kernels o neurones per capa
+layers es el que hi ha dins del sequential
+feature maps = sequencia de caracteristicas, k activaciones. 
+

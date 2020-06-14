@@ -1,0 +1,3 @@
+coefs =  20 , Nfilters =  24 , Ngauss =  11, nerr=10 ntot=785 error_rate=1.27%
+coefs =  22 , Nfilters =  28 , Ngauss =  12, nerr=10 ntot=785 error_rate=1.27%
+coefs =  18 , Nfilters =  36 , Ngauss =  12, nerr=10 ntot=785 error_rate=1.27%

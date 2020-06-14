@@ -1,6 +1,11 @@
 PAV - P4: reconocimiento y verificación del locutor
 ===================================================
 
+
+## Andrea Iturralde - Albert Gassol
+
+<img src="img/unnamed.jpg" width = "200" align="center">
+
 Obtenga su copia del repositorio de la práctica accediendo a [Práctica 4](https://github.com/albino-pav/P4)
 y pulsando sobre el botón `Fork` situado en la esquina superior derecha. A continuación, siga las
 instrucciones de la [Práctica 2](https://github.com/albino-pav/P2) para crear una rama con el apellido de
@@ -31,35 +36,73 @@ ejercicios indicados.
 
 - Analice el script `wav2lp.sh` y explique la misión de los distintos comandos, y sus opciones, involucrados
   en el *pipeline* principal (`sox`, `$X2X`, `$FRAME`, `$WINDOW` y `$LPC`).
+
+  `sox`: Transforma el fichero de entrada WAVE a formato raw (sin cabecera).
   
+  `x2x`: Programa de `sptk` permite la conversión entre distintos formatos de datos, convierte la señal de entrada a reales en coma flotante de 32 bits sin cabecera. 
+  
+  `FRAME`: Divide la señal de entrada en tramas de 240 muestras (30ms) con desplazamientos de 80 muestras (10ms).
+  
+  `WINDOW`: Ventana de Blackman por defecto. Multiplica cada trama.
+  
+  `LPC`: Calcula los "lpc_order" (8 en nuestro caso) primeros coeficientes de predicción linial de todas las tramas.
+
+
 - Explique el procedimiento seguido para obtener un fichero de formato *fmatrix* a partir de los ficheros
   de salida de SPTK (líneas 41 a 47 del script `wav2lp.sh`).
 
+  Obtenemos los coeficientes LPC y los guardamos en los ficheros .lp. Definimos el número de columnas de la matriz como el número de coeficientes lpc+1. El número de filas es el número de tramas de la señal. Finalmente utilizamos `x2x`  para construir la matriz con el número de filas, el número de columnas y los datos.
+
   * ¿Por qué es conveniente usar este formato (u otro parecido)?
+
+  Para tener los datos ordenados y poder acceder a ellos fácilmente.
 
 - Escriba el *pipeline* principal usado para calcular los coeficientes cepstrales de predicción lineal
   (LPCC) en su fichero <code>scripts/wav2lpcc.sh</code>:
+  
+  ```bash
+  sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WINDOW -l 240 -L 240 |
+	$LPC -l 240 -m $lpc_order | $LPCC -m $lpc_order -M $cepstrum_order > $base.lpcc
+  ```
 
 - Escriba el *pipeline* principal usado para calcular los coeficientes cepstrales en escala Mel (MFCC) en
   su fichero <code>scripts/wav2mfcc.sh</code>:
+  
+  ```bash
+  sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WINDOW -l 240 -L 240 |
+	$MFCC -l 240 -m $mfcc_order -n $num_filters -s $freq > $base.mfcc
+  ```
 
 ### Extracción de características.
 
 - Inserte una imagen mostrando la dependencia entre los coeficientes 2 y 3 de las tres parametrizaciones
   para una señal de prueba.
-  
+
+<img src="img/lpCoefsv3.png" width = "640" align="center">
+<img src="img/lpccCoefsv4.png" width = "640" align="center">
+<img src="img/mfccCoefsv3.png" width = "640" align="center">  
+
   + ¿Cuál de ellas le parece que contiene más información?
+
+MFCC y LPCC contienen más información, ya que los coeficientes estan menos correlados entre si.
 
 - Usando el programa <code>pearson</code>, obtenga los coeficientes de correlación normalizada entre los
   parámetros 2 y 3, y rellene la tabla siguiente con los valores obtenidos.
 
   |                        | LP   | LPCC | MFCC |
   |------------------------|:----:|:----:|:----:|
-  | &rho;<sub>x</sub>[2,3] |      |      |      |
+  | &rho;<sub>x</sub>[2,3] |  -0.872284    |   0.184235   |  -0.198242
   
   + Compare los resultados de <code>pearson</code> con los obtenidos gráficamente.
+
+Los resultados concuerdan con las gráficas. Los coeficientes de LPCC y MFCC están menos correlados entre si como indica &rho;<sub>x</sub>[2,3], en las gráficas esto se refleja con una mayor dispersión de los puntos. Los coeficientes LPC están más correlados, esto se refleja en la gráfica con una cierta "linealidad". 
+
   
 - Según la teoría, ¿qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC?
+
+Número de coeficientes LPCC = 8-12
+
+Número de coeficientes MFCC = 14-18
 
 ### Entrenamiento y visualización de los GMM.
 
@@ -68,9 +111,24 @@ Complete el código necesario para entrenar modelos GMM.
 - Inserte una gráfica que muestre la función de densidad de probabilidad modelada por el GMM de un locutor
   para sus dos primeros coeficientes de MFCC.
   
+  <img src="img/gmm40_v3.png" width = "800" align="center">
+  <img src="img/gmm164_v3.png" width = "800" align="center">
+  
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
   del modelado GMM para diferenciar las señales de uno y otro.
+
+  Azul: locutor 164
+  
+  Rojo: locutor 40
+  
+  <img src="img/gmm40_data40_v3.png" width = "800" align="center">
+  <img src="img/gmm40_data164_v3.png" width = "800" align="center">
+  <img src="img/gmm164_data164_v3.png" width = "800" align="center">
+  <img src="img/gmm164_data40_v3.png" width = "800" align="center">
+
+El modelo GMM define muy bien las características de cada señal. En las gráficas podemos ver que los GMM de cada locutor son bastante diferentes, ya que las características MFCC de cada uno son diferentes.
+
 
 ### Reconocimiento del locutor.
 
@@ -78,6 +136,20 @@ Complete el código necesario para realizar reconociminto del locutor y optimice
 
 - Inserte una tabla con la tasa de error obtenida en el reconocimiento de los locutores de la base de datos
   SPEECON usando su mejor sistema de reconocimiento para los parámetros LP, LPCC y MFCC.
+
+ |  Metodo |  Número errores | Número total | Tasa de error |
+ |-------- |:---------------:|:------------:|:-------------:|
+ |  LPCC   |  29             |   785        |  3.57%        |
+ |  LP     |  166            |   785        |  21.15%       |
+ |  MFCC   |  10             |   785        |  1.27%        |
+
+**MFCC:** Número de coeficientes = 20. Número de filtros = 24. Número de Gaussianas por GMM = 11.
+
+**LPCC:** Número de coeficientes = 14. Orden de LP = 14. Número de Gaussianas por GMM = 8.
+
+**LP:** Orden = 14. Número de Gaussianas por GMM = 8.
+
+Para la realización de este apartado, hemos generado el script `run_all.sh`, que genera la paramterización MFCC con distintos valores de número de coeficientes y número de filtros. También hemos desarrolado el script `run_train_test.sh`, que entrena GMM con varios números de gaussianas, coeficientes y filtros MFCC. Finalmente, el script calcula la tasa de error con los parámetros de la iteración en la que se encuentre y guarda los resultados en el fichero `results.txt`. En el fichero `best.txt` se encuentran las tres mejores parametrizaciones sacadas de `results.txt`. Para poder realizar estas operaciones, también hemos generado el script `run_spkid_modified.sh` (hecho a partir de `run_spkid.sh`) con el fin de poder passar los parámetros adecuados con los scripts anteriores.
 
 ### Verificación del locutor.
 
@@ -87,11 +159,53 @@ Complete el código necesario para realizar verificación del locutor y optimice
   de verificación de SPEECON. La tabla debe incluir el umbral óptimo, el número de falsas alarmas y de
   pérdidas, y el score obtenido usando la parametrización que mejor resultado le hubiera dado en la tarea
   de reconocimiento.
- 
+
+La parametrización que mejor resultado nos ha dado es utilizando **MFCC**. Con 16 coeficientes MFCC, 20 filtros, 20 gaussianas por GMM y 100 gaussianas para la GMM world. El resultado es el siguiente.
+
+ |  Missed |  False Alarm    | Cost detection | Threshhold         |
+ |-------- |:---------------:|:--------------:|:------------------:|
+ |  49/250 |  0/1000         |   19.6         | -0.323600500728088 |
+
+Con los parámetros óptimos en classificación el resultado en verifiación es el siguiente:
+
+ |  Missed |  False Alarm    | Cost detection | Threshhold        |
+ |-------- |:---------------:|:--------------:|:-----------------:|
+ | 184/250 |  0/1000         |   73.6         | 0.398814340647004 |
+
+Podemos ver que los resultados son mucho peores que los anteriores.
+
+Para encontrar unos parámetros más buenos para este apartado de verificación, hemos generado el script `run_verify.sh`, que junto con`run_spkid_modified.sh`, permite calcular varios costes con distintas parametrizaciones.
+
+### Conclusión.
+
+Finalmente, podemos concluir que nuestro mejor sistema se obtiene con MFCC: 16 coeficientes MFCC, 20 filtros, 20 gaussianas por GMM y 100 gaussianas para la GMM world. 
+
+Los resultados de verifiación se indican en la tabla anterior, los de clasificación son los siguientes.
+
+ |  Número errores | Número total | Tasa de error|
+ |----------------:|:------------:|:------------:|
+ |  12             |   785        |  1.53%       |
+
+
+Si se ejecuta el comando que viene a continuación, se puede observar el comporamiento del sistema con los párametros descritos en este apartado.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
+run_spkid mfcc train test classerr trainworld verify verifyerr
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 ### Test final y trabajo de ampliación.
 
 - Recuerde adjuntar los ficheros `class_test.log` y `verif_test.log` correspondientes a la evaluación
   *ciega* final.
+
+Para realizar la evaluación ciega con los parámetros descritos en el apartado anterior se debe utilizar el comando:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
+FEAT=mfcc run_spkid finalclass finalverif
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los resultados se guardan en los ficheros `workFinal/class_test.log` y `workFinal/verif_test.log`.
 
 - Recuerde, también, enviar a Atenea un fichero en formato zip o tgz con la memoria con el trabajo
   realizado como ampliación, así como los ficheros `class_ampl.log` y/o `verif_ampl.log`, obtenidos como

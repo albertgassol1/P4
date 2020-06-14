@@ -2,9 +2,17 @@
 
 scripts = [
     'run_spkid.sh',
+    'run_spkid_modified.sh',
+    'run_spkid_amp.sh',
     'plot_gmm_feat.py',
     'spk_verif_score.pl',
     'wav2lp.sh',
+    'wav2lpcc.sh',
+    'wav2mfcc.sh',
+    'wav2dynmfcc.sh',
+    'run_all.sh',
+    'run_train_test.sh',
+    'run_verify.sh'
 ]
 
 foreach script: scripts

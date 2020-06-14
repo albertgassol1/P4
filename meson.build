@@ -19,4 +19,4 @@ subdir('scripts')
 subdir('src/doxyfile')
 
 # Red neuronal de Santi Pascual
-subdir('pav_spkid_pytorch')
+# subdir('pav_spkid_pytorch/pytorch-env')
